@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Art Converter</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23111'/><rect x='1' y='1' width='6' height='6' fill='%23e74c3c'/><rect x='9' y='1' width='6' height='6' fill='%233498db'/><rect x='1' y='9' width='6' height='6' fill='%232ecc71'/><rect x='9' y='9' width='6' height='6' fill='%23f39c12'/></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Pixel Art Converter</h1>
+
+    <div id="upload-zone" class="upload-zone">
+      <input type="file" id="file-input" accept="image/*" hidden>
+      <p>Drop an image here or <span class="link">click to upload</span></p>
+    </div>
+
+    <div id="workspace" class="workspace hidden">
+      <div class="previews">
+        <div class="preview">
+          <label>Original</label>
+          <canvas id="original"></canvas>
+        </div>
+        <div class="preview">
+          <label>Pixel Art</label>
+          <canvas id="output"></canvas>
+        </div>
+      </div>
+
+      <div class="controls">
+        <label for="pixel-size">Block size: <span id="pixel-value">16</span>px</label>
+        <input type="range" id="pixel-size" min="2" max="64" value="16" step="1">
+        <div class="mode-toggle">
+          <button class="mode-btn active" data-mode="color">Color</button>
+          <button class="mode-btn" data-mode="bw">B&amp;W</button>
+        </div>
+        <button id="download-btn">Download PNG</button>
+        <button id="reset-btn" class="secondary">Change image</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

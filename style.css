@@ -1,0 +1,168 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #111;
+  color: #eee;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 960px;
+}
+
+h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+/* Upload zone */
+.upload-zone {
+  border: 2px dashed #333;
+  border-radius: 8px;
+  padding: 5rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: #555;
+  color: #bbb;
+}
+
+.link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Workspace */
+.previews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.preview label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #555;
+  margin-bottom: 0.4rem;
+}
+
+.preview canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  image-rendering: pixelated;
+  background: #1a1a1a;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.controls > label {
+  font-size: 0.8rem;
+  color: #888;
+  white-space: nowrap;
+  min-width: 130px;
+}
+
+#pixel-size {
+  flex: 1;
+  accent-color: #fff;
+  cursor: pointer;
+}
+
+button {
+  padding: 0.45rem 1.1rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#download-btn {
+  background: #fff;
+  color: #111;
+}
+
+button.secondary {
+  background: transparent;
+  color: #666;
+  border: 1px solid #333;
+}
+
+button.secondary:hover {
+  color: #aaa;
+  border-color: #555;
+  opacity: 1;
+}
+
+/* Mode toggle */
+.mode-toggle {
+  display: flex;
+  border: 1px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mode-btn {
+  background: transparent;
+  color: #555;
+  border: none;
+  border-radius: 0;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.mode-btn:hover {
+  color: #aaa;
+  opacity: 1;
+}
+
+.mode-btn.active {
+  background: #333;
+  color: #eee;
+}
+
+.mode-btn + .mode-btn {
+  border-left: 1px solid #333;
+}
