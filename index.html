@@ -21,10 +21,12 @@
         <div class="preview">
           <label>Original</label>
           <canvas id="original"></canvas>
+          <div class="image-info" id="original-info"></div>
         </div>
         <div class="preview">
           <label>Pixel Art</label>
           <canvas id="output"></canvas>
+          <div class="image-info" id="output-info"></div>
         </div>
       </div>
 
@@ -34,6 +36,10 @@
         <div class="mode-toggle">
           <button class="mode-btn active" data-mode="color">Color</button>
           <button class="mode-btn" data-mode="bw">B&amp;W</button>
+        </div>
+        <div class="mode-toggle">
+          <button class="bg-btn active" data-bg="keep">Keep BG</button>
+          <button class="bg-btn" data-bg="remove">Remove BG</button>
         </div>
         <button id="download-btn">Download PNG</button>
         <button id="reset-btn" class="secondary">Change image</button>
