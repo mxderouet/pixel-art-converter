@@ -7,9 +7,12 @@ const pixelSizeInput = document.getElementById('pixel-size');
 const pixelValueLabel = document.getElementById('pixel-value');
 const downloadBtn = document.getElementById('download-btn');
 const resetBtn = document.getElementById('reset-btn');
+const originalInfo = document.getElementById('original-info');
+const outputInfo = document.getElementById('output-info');
 
 let currentImage = null;
 let bwMode = false;
+let removeBg = false;
 
 uploadZone.addEventListener('click', () => fileInput.click());
 
@@ -51,6 +54,8 @@ function drawOriginal(img) {
   originalCanvas.width = img.naturalWidth;
   originalCanvas.height = img.naturalHeight;
   originalCanvas.getContext('2d').drawImage(img, 0, 0);
+  const w = img.naturalWidth, h = img.naturalHeight;
+  originalInfo.textContent = `${w} × ${h} px — ${(w * h).toLocaleString()} pixels`;
 }
 
 function pixelate(img, blockSize) {
@@ -81,6 +86,20 @@ function pixelate(img, blockSize) {
   const ctx = outputCanvas.getContext('2d');
   ctx.imageSmoothingEnabled = false;
   ctx.drawImage(offscreen, 0, 0, w, h);
+
+  outputInfo.textContent = `${w} × ${h} px — ${smallW} × ${smallH} pixel art blocks`;
+
+  if (removeBg) {
+    const imageData = ctx.getImageData(0, 0, w, h);
+    const d = imageData.data;
+    const threshold = 230;
+    for (let i = 0; i < d.length; i += 4) {
+      if (d[i] >= threshold && d[i + 1] >= threshold && d[i + 2] >= threshold) {
+        d[i + 3] = 0;
+      }
+    }
+    ctx.putImageData(imageData, 0, 0);
+  }
 }
 
 document.querySelectorAll('.mode-btn').forEach((btn) => {
@@ -88,6 +107,15 @@ document.querySelectorAll('.mode-btn').forEach((btn) => {
     document.querySelectorAll('.mode-btn').forEach((b) => b.classList.remove('active'));
     btn.classList.add('active');
     bwMode = btn.dataset.mode === 'bw';
+    if (currentImage) pixelate(currentImage, parseInt(pixelSizeInput.value));
+  });
+});
+
+document.querySelectorAll('.bg-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.bg-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    removeBg = btn.dataset.bg === 'remove';
     if (currentImage) pixelate(currentImage, parseInt(pixelSizeInput.value));
   });
 });
